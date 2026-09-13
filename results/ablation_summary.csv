@@ -1,0 +1,4 @@
+Model,Accuracy_Enabled,Accuracy_Disabled,Accuracy_Delta,F1_Enabled,F1_Disabled,F1_Delta,Recall_Enabled,Recall_Disabled,Precision_Enabled,Precision_Disabled
+Multinomial Naive Bayes,97.58 ± 0.32,97.97 ± 0.23,-0.39,90.08 ± 1.38,91.78 ± 0.96,-1.70,82.33,85.01,99.45,99.74
+Logistic Regression,97.10 ± 0.72,97.73 ± 0.45,-0.63,87.90 ± 3.28,90.71 ± 1.97,-2.81,79.19,83.22,98.86,99.72
+Linear SVM,98.42 ± 0.31,98.92 ± 0.00,-0.51,93.80 ± 1.22,95.82 ± 0.02,-2.02,89.71,92.39,98.29,99.52
