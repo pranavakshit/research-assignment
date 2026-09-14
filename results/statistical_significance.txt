@@ -1,0 +1,41 @@
+================================================================================
+       EXPLORATORY STATISTICAL SIGNIFICANCE REPORT (SEEDS: 42, 101, 2024)       
+================================================================================
+
+NOTE ON METHODOLOGY & SAMPLE SIZE:
+  Because only n=3 independent random seeds were evaluated, standard parametric
+  and non-parametric tests have limited statistical power. These tests are presented
+  strictly as exploratory indicators of performance separation rather than definitive
+  population-level proofs. No seeds were manipulated or cherry-picked.
+
+--------------------------------------------------------------------------------
+1. PAIRWISE COMPARISON: Linear SVM vs. Multinomial Naive Bayes
+--------------------------------------------------------------------------------
+Metric: Spam F1-Score
+  Per-seed Linear SVM F1 : [np.float64(93.71), np.float64(92.63), np.float64(95.07)]
+  Per-seed MNB F1        : [np.float64(88.56), np.float64(91.24), np.float64(90.44)]
+  Differences (SVM - MNB): [np.float64(5.15), np.float64(1.39), np.float64(4.63)]
+  Mean Difference        : +3.72%
+  Paired t-test          : t = 3.1674, p-value = 0.08688
+  Wilcoxon Signed-Rank   : W = 0.0, p-value = 0.25
+
+Metric: Overall Accuracy
+  Differences (SVM - MNB): [np.float64(1.17), np.float64(0.27), np.float64(1.08)]
+  Mean Difference        : +0.84%
+  Paired t-test          : t = 2.9352, p-value = 0.09911
+
+--------------------------------------------------------------------------------
+2. PAIRWISE COMPARISON: Linear SVM vs. Logistic Regression
+--------------------------------------------------------------------------------
+Metric: Spam F1-Score
+  Per-seed Linear SVM F1 : [np.float64(93.71), np.float64(92.63), np.float64(95.07)]
+  Per-seed LR F1         : [np.float64(88.39), np.float64(84.41), np.float64(90.91)]
+  Differences (SVM - LR) : [np.float64(5.32), np.float64(8.22), np.float64(4.16)]
+  Mean Difference        : +5.90%
+  Paired t-test          : t = 4.8854, p-value = 0.03944
+  Wilcoxon Signed-Rank   : W = 0.0, p-value = 0.25
+
+Metric: Overall Accuracy
+  Differences (SVM - LR) : [np.float64(1.17), np.float64(1.79), np.float64(0.99)]
+  Mean Difference        : +1.32%
+  Paired t-test          : t = 5.3755, p-value = 0.03291
