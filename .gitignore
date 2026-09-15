@@ -25,3 +25,6 @@ project/*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Archives and submission packages
+*.zip
