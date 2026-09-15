@@ -1,6 +1,9 @@
 # Question-Wise Evidence Document
 **Course:** Research Methodology in CS | CSEG3060  
 **Programme:** B.Tech Computer Science | Semester: V  
+**Author / Student Name:** Pranav Akshit  
+**Student Email:** pranav.119568@stu.upes.ac.in  
+**GitHub Repository:** https://github.com/pranavakshit/research-assignment  
 **Project Title:** A Comparative Study of Machine Learning Approaches for SMS Spam Detection  
 **Working Directory:** `D:\Repositories\research-assignment`  
 **Execution Environment:** Python 3.11.9 (`.venv`), scikit-learn 1.9.1, NumPy 2.4.6, SciPy 1.17.1, Pandas 3.0.5, Matplotlib 3.11.2, Seaborn 0.13.2  
