@@ -263,9 +263,9 @@ Executed via `experiments/run_benchmarks.py`. Raw execution logs preserved in `r
 #### Table 5.1: Consolidated Experimental Results Across 3 Seeds (Mean ± Std)
 | Model Name | Accuracy (%) | Spam Precision (%) | Spam Recall (%) | Spam F1-Score (%) | Macro F1 (%) | Mean TP | Mean FP | Mean FN | Mean TN |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Multinomial Naive Bayes** | $97.58 \pm 0.32$ | $\mathbf{99.45 \pm 0.95}$ | $82.33 \pm 1.69$ | $90.08 \pm 1.38$ | $94.27 \pm 0.77$ | 122.67 | $\mathbf{0.67}$ | 26.33 | $\mathbf{965.33}$ |
-| **Logistic Regression** | $97.10 \pm 0.72$ | $98.86 \pm 1.35$ | $79.19 \pm 4.70$ | $87.90 \pm 3.28$ | $93.04 \pm 1.76$ | 118.00 | 1.33 | 31.00 | 964.67 |
-| **Linear SVM** | $\mathbf{98.42 \pm 0.31}$ | $98.29 \pm 1.53$ | $\mathbf{89.71 \pm 1.03}$ | $\mathbf{93.80 \pm 1.22}$ | $\mathbf{96.34 \pm 0.69}$ | $\mathbf{133.67}$ | 2.33 | $\mathbf{15.33}$ | 963.67 |
+| **Multinomial Naive Bayes** | $97.58 \pm 0.32$ | $\mathbf{99.45 \pm 0.95}$ | $82.33 \pm 1.69$ | $90.08 \pm 1.38$ | $94.35 \pm 0.78$ | 122.67 | $\mathbf{0.67}$ | 26.33 | $\mathbf{965.33}$ |
+| **Logistic Regression** | $97.10 \pm 0.72$ | $98.86 \pm 1.35$ | $79.19 \pm 4.70$ | $87.90 \pm 3.28$ | $93.13 \pm 1.84$ | 118.00 | 1.33 | 31.00 | 964.67 |
+| **Linear SVM** | $\mathbf{98.42 \pm 0.31}$ | $98.29 \pm 1.53$ | $\mathbf{89.71 \pm 1.03}$ | $\mathbf{93.80 \pm 1.22}$ | $\mathbf{96.45 \pm 0.70}$ | $\mathbf{133.67}$ | 2.33 | $\mathbf{15.33}$ | 963.67 |
 
 *Per-seed raw breakdown:*
 - **Seed 42:** MNB (Acc: 97.22%, F1: 88.56%), LR (Acc: 97.22%, F1: 88.39%), Linear SVM (Acc: 98.39%, F1: 93.71%)
@@ -275,12 +275,12 @@ Executed via `experiments/run_benchmarks.py`. Raw execution logs preserved in `r
 ### 5.3 Preprocessing Ablation Study Evidence [Q5 c]
 Executed via `experiments/run_ablation.py`. Compares **Preprocessing Enabled** (lowercasing, punctuation removal, stopword filtering) vs. **Preprocessing Disabled** (raw text directly passed into TF-IDF vectorizer). Raw logs preserved in `results/raw/ablation_results.json`.
 
-#### Table 5.2: Ablation Results Across Classifiers (Mean ± Std over 3 Seeds)
+#### Table 5.2: Ablation Results Across Classifiers (Mean ± Std over 3 Seeds; $\Delta = \text{Disabled} - \text{Enabled}$)
 | Classifier | Accuracy (Enabled) | Accuracy (Disabled) | $\Delta$ Acc | Spam F1 (Enabled) | Spam F1 (Disabled) | $\Delta$ F1 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Multinomial Naive Bayes** | $97.58 \pm 0.32$ | $97.97 \pm 0.23$ | $-0.39\%$ | $90.08 \pm 1.38$ | $91.78 \pm 0.96$ | $\mathbf{-1.70\%}$ |
-| **Logistic Regression** | $97.10 \pm 0.72$ | $97.73 \pm 0.45$ | $-0.63\%$ | $87.90 \pm 3.28$ | $90.71 \pm 1.97$ | $\mathbf{-2.81\%}$ |
-| **Linear SVM** | $98.42 \pm 0.31$ | $98.92 \pm 0.00$ | $-0.50\%$ | $93.80 \pm 1.22$ | $95.82 \pm 0.02$ | $\mathbf{-2.02\%}$ |
+| **Multinomial Naive Bayes** | $97.58 \pm 0.32$ | $97.97 \pm 0.23$ | $+0.39\%$ | $90.08 \pm 1.38$ | $91.78 \pm 0.96$ | $\mathbf{+1.70\%}$ |
+| **Logistic Regression** | $97.10 \pm 0.72$ | $97.73 \pm 0.45$ | $+0.63\%$ | $87.90 \pm 3.28$ | $90.71 \pm 1.97$ | $\mathbf{+2.81\%}$ |
+| **Linear SVM** | $98.42 \pm 0.31$ | $98.92 \pm 0.00$ | $+0.50\%$ | $93.80 \pm 1.22$ | $95.82 \pm 0.02$ | $\mathbf{+2.02\%}$ |
 
 - **Observed Effect & Mechanism:** Across all three classifiers, **disabling preprocessing consistently improved both Accuracy and Spam F1-Score**. Specifically, Spam F1 improved by $+1.70\%$ for MNB, $+2.81\%$ for LR, and $+2.02\%$ for Linear SVM.  
   *Root Cause:* In standard natural language tasks, stopword removal and lowercasing reduce noise. In SMS spam detection, however, capitalization patterns (e.g., `"FREE"`, `"URGENT"`, `"WINNER"`), exclamation punctuation (e.g., `"!!!"`), and currency characters (e.g., `"£"`) are potent discriminative features. Stripping these tokens during preprocessing discards crucial signal, resulting in higher false negatives and degraded spam recall.
