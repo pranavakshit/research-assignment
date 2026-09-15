@@ -218,13 +218,13 @@ cd ..
 
 | Classifier | Accuracy (%) | Spam Precision (%) | Spam Recall (%) | Spam F1-Score (%) | Macro F1-Score (%) | Mean False Positives | Mean False Negatives |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Multinomial Naive Bayes** | $97.58 \pm 0.32$ | $\mathbf{99.45 \pm 0.95}$ | $82.33 \pm 1.69$ | $90.08 \pm 1.38$ | $94.27 \pm 0.77$ | $\mathbf{0.67}$ | 26.33 |
-| **Logistic Regression** | $97.10 \pm 0.72$ | $98.86 \pm 1.35$ | $79.19 \pm 4.70$ | $87.90 \pm 3.28$ | $93.04 \pm 1.76$ | 1.33 | 31.00 |
-| **Linear SVM** | $\mathbf{98.42 \pm 0.31}$ | $98.29 \pm 1.53$ | $\mathbf{89.71 \pm 1.03}$ | $\mathbf{93.80 \pm 1.22}$ | $\mathbf{96.34 \pm 0.69}$ | 2.33 | $\mathbf{15.33}$ |
+| **Multinomial Naive Bayes** | $97.58 \pm 0.32$ | $\mathbf{99.45 \pm 0.95}$ | $82.33 \pm 1.69$ | $90.08 \pm 1.38$ | $94.35 \pm 0.78$ | $\mathbf{0.67}$ | 26.33 |
+| **Logistic Regression** | $97.10 \pm 0.72$ | $98.86 \pm 1.35$ | $79.19 \pm 4.70$ | $87.90 \pm 3.28$ | $93.13 \pm 1.84$ | 1.33 | 31.00 |
+| **Linear SVM** | $\mathbf{98.42 \pm 0.31}$ | $98.29 \pm 1.53$ | $\mathbf{89.71 \pm 1.03}$ | $\mathbf{93.80 \pm 1.22}$ | $\mathbf{96.45 \pm 0.70}$ | 2.33 | $\mathbf{15.33}$ |
 
-### Preprocessing Ablation Summary (Enabled vs. Disabled)
+### Preprocessing Ablation Summary (Enabled vs. Disabled; $\Delta = \text{Disabled} - \text{Enabled}$)
 
-| Classifier | Spam F1 (Enabled) | Spam F1 (Disabled) | F1 Absolute Gain | Accuracy (Enabled) | Accuracy (Disabled) |
+| Classifier | Spam F1 (Enabled) | Spam F1 (Disabled) | F1 Absolute Gain ($\Delta$) | Accuracy (Enabled) | Accuracy (Disabled) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Multinomial Naive Bayes** | $90.08 \pm 1.38\%$ | $91.78 \pm 0.96\%$ | $\mathbf{+1.70\%}$ | $97.58 \pm 0.32\%$ | $97.97 \pm 0.23\%$ |
 | **Logistic Regression** | $87.90 \pm 3.28\%$ | $90.71 \pm 1.97\%$ | $\mathbf{+2.81\%}$ | $97.10 \pm 0.72\%$ | $97.73 \pm 0.45\%$ |
