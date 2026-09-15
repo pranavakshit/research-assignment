@@ -2,6 +2,7 @@
 **Course:** Research Methodology in CS | CSEG3060  
 **Programme:** B.Tech Computer Science | Semester: V  
 **Author / Student Name:** Pranav Akshit  
+**SAP ID:** 500119568  
 **Student Email:** pranav.119568@stu.upes.ac.in  
 **GitHub Repository:** https://github.com/pranavakshit/research-assignment  
 **Project Title:** A Comparative Study of Machine Learning Approaches for SMS Spam Detection  
@@ -125,7 +126,7 @@ Prior comparative literature frequently evaluates models on single arbitrary spl
                         ONE-PAGE RESEARCH PROPOSAL (CSEG3060)
 Project Title: A Comparative Empirical Study of Lightweight Machine Learning Classifiers for SMS 
                Spam Detection Under Controlled Experimental Conditions
-Student Investigator: UPES B.Tech Computer Science (Semester V)
+Student Investigator: Pranav Akshit (SAP ID: 500119568), UPES B.Tech CS (Sem V)
 ====================================================================================================
 
 1. PROBLEM STATEMENT:
