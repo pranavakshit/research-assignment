@@ -1,0 +1,118 @@
+@startuml "A Comparative Study of Machine Learning Approaches for SMS Spam Detection"
+skinparam backgroundColor #FDFDFD
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 11
+skinparam defaultFontColor #222222
+skinparam packageBackgroundColor #F5F7FA
+skinparam packageBorderColor #B0BEC5
+
+title A Comparative Study of Machine Learning Approaches for SMS Spam Detection - End-to-End Architecture
+
+package "1. Dataset Acquisition & Ingestion" as P1 {
+  [UCI SMS Spam Collection\n(5,574 messages)] as RAW_DATA #E3F2FD
+  [Data Loader & Integrity Verifier\n(src/data_loader.py)] as LOADER #BBDEFB
+}
+
+package "2. Text Preprocessing & Ablation Layer" as P2 {
+  [Text Preprocessor\n(src/preprocessor.py)] as PREPROC #E8F5E9
+  [Ablation Controller\n(Preprocessing Enabled vs. Disabled)] as ABL_CTRL #C8E6C9
+}
+
+package "3. Multi-Seed Stratified Partitioning" as P3 {
+  [Stratified 80/20 Split Engine\n(Seeds: 42, 101, 2024)] as SPLIT #FFF3E0
+  [Train Partition (4,459 samples)] as TRAIN_SPLIT #FFE0B2
+  [Test Partition (1,115 samples)] as TEST_SPLIT #FFE0B2
+}
+
+package "4. Leakage-Free Feature Extraction" as P4 {
+  [Sublinear TF-IDF Vectorizer\n(src/feature_extractor.py)\n- Vocabulary: 3,000 terms\n- Sublinear TF (1+log(tf))\n- L2 Normalization] as TFIDF #EDE7F6
+  [Fitted Training Vectorizer\n(Zero Contamination)] as FIT_TFIDF #D1C4E9
+  [Transformed Test Matrix\n(Out-of-Sample Transform)] as TEST_VEC #D1C4E9
+}
+
+package "5. Model Training & Correctness Testing" as P5 {
+  [Correctness Check Suite\n(experiments/correctness_check.py)] as TESTS #FFEBEE
+  [Multinomial Naive Bayes\n(alpha = 1.0, Laplace)] as MNB #E1F5FE
+  [Logistic Regression\n(C = 1.0, L2, L-BFGS)] as LR #E0F2F1
+  [Linear Support Vector Classifier\n(C = 1.0, Squared-Hinge)] as SVM #F3E5F5
+}
+
+package "6. Controlled Benchmarking & Logging" as P6 {
+  [Multi-Seed Benchmark Runner\n(experiments/run_benchmarks.py)] as RUNNER #FCE4EC
+  [Ablation Benchmark Runner\n(experiments/run_ablation.py)] as ABL_RUNNER #F8BBD0
+  [Raw Results JSONs\n(results/raw/*.json)] as RAW_RESULTS #ECEFF1
+  [Consolidated Metrics CSV\n(results/consolidated_results.csv)] as CONSOL_CSV #CFD8DC
+  [Ablation Summary CSV\n(results/ablation_summary.csv)] as ABL_CSV #CFD8DC
+}
+
+package "7. Statistical Significance & Plotting" as P7 {
+  [Statistical Testing Engine\n(experiments/statistical_test.py)] as STATS #FFFDE7
+  [Publication Plotting Suite\n(plots/generate_plots.py)] as PLOTTER #FFF9C4
+  [Statistical Report\n(results/statistical_significance.txt)] as STAT_REPORT #FFF59D
+  [Figure 1: Benchmark Comparison\n(plots/fig1_model_performance.pdf)] as FIG1 #FFF59D
+  [Figure 2: Ablation Impact\n(plots/fig2_ablation_impact.pdf)] as FIG2 #FFF59D
+  [Figure 3: Confusion Matrices\n(plots/fig3_confusion_matrices.pdf)] as FIG3 #FFF59D
+}
+
+package "8. Literature Synthesis & Evidence Package" as P8 {
+  [Verified Literature Matrix\n(10 papers, 7 from 2022-2024)\n(literature/literature_matrix.csv)] as LIT_MAT #E0F7FA
+  [Systematic Critical Review\n(literature/critical_review.md)] as LIT_REV #B2EBF2
+  [Question-Wise Evidence (Q1-Q8)\n(evidence/question_wise_evidence.md)] as EVIDENCE #80DEEA
+  [Self-Review & Revision Response\n(paper/self_review_response.md)] as REVIEW_RESP #4DD0E1
+}
+
+package "9. IEEE Conference Publication" as P9 {
+  [LaTeX Manuscript\n(paper/paper.tex)] as TEX #E8EAF6
+  [BibTeX Bibliography\n(paper/references.bib)] as BIB #C5CAE9
+  [Compiled Camera-Ready Paper\n(paper/paper.pdf - Exactly 8 Pages)] as PDF #9FA8DA
+}
+
+' Every arrow has a completely unique hex color
+RAW_DATA -[#1f77b4]-> LOADER : "1. Load raw data"
+LOADER -[#ff7f0e]-> PREPROC : "2. Text normalization"
+LOADER -[#2ca02c]-> ABL_CTRL : "3. Raw message pass-through"
+PREPROC -[#d62728]-> ABL_CTRL : "4. Cleaned message feed"
+ABL_CTRL -[#9467bd]-> SPLIT : "5. Dispatch to stratified splitter"
+SPLIT -[#8c564b]-> TRAIN_SPLIT : "6. Partition 80% train"
+SPLIT -[#e377c2]-> TEST_SPLIT : "7. Partition 20% test"
+TRAIN_SPLIT -[#7f7f7f]-> FIT_TFIDF : "8. Fit vocabulary & IDF (train only)"
+FIT_TFIDF -[#bcbd22]-> TFIDF : "9. Freeze vectorizer weights"
+TEST_SPLIT -[#17becf]-> TEST_VEC : "10. Transform out-of-sample test"
+FIT_TFIDF -[#aec7e8]-> TESTS : "11. Verify zero data leakage"
+TESTS -[#ffbb78]-> RUNNER : "12. Pass validation gates"
+TRAIN_SPLIT -[#98df8a]-> MNB : "13. Train Multinomial Naive Bayes"
+TRAIN_SPLIT -[#ff9896]-> LR : "14. Train Logistic Regression"
+TRAIN_SPLIT -[#c5b0d5]-> SVM : "15. Train Linear Support Vector Classifier"
+MNB -[#c49c94]-> RUNNER : "16. Benchmark MNB across seeds"
+LR -[#f7b6d2]-> RUNNER : "17. Benchmark LR across seeds"
+SVM -[#c7c7c7]-> RUNNER : "18. Benchmark Linear SVM across seeds"
+ABL_CTRL -[#dbdb8d]-> ABL_RUNNER : "19. Configure enabled vs. disabled"
+ABL_RUNNER -[#9edae5]-> ABL_CSV : "20. Output ablation metrics"
+RUNNER -[#393b79]-> RAW_RESULTS : "21. Save raw per-seed run JSONs"
+RUNNER -[#5254a3]-> CONSOL_CSV : "22. Save consolidated metrics CSV"
+CONSOL_CSV -[#6b6ecf]-> STATS : "23. Feed paired statistical tests"
+STATS -[#9c9ede]-> STAT_REPORT : "24. Generate t-test & Wilcoxon reports"
+CONSOL_CSV -[#637939]-> PLOTTER : "25. Feed metric figures"
+ABL_CSV -[#8ca252]-> PLOTTER : "26. Feed ablation figure"
+RAW_RESULTS -[#b5cf6b]-> PLOTTER : "27. Feed confusion matrix arrays"
+PLOTTER -[#cedb9f]-> FIG1 : "28. Export Figure 1 PDF/PNG"
+PLOTTER -[#8c6d31]-> FIG2 : "29. Export Figure 2 PDF/PNG"
+PLOTTER -[#bd9e39]-> FIG3 : "30. Export Figure 3 PDF/PNG"
+LIT_MAT -[#e7ba52]-> LIT_REV : "31. Synthesize literature matrix"
+LIT_REV -[#e7cb94]-> EVIDENCE : "32. Synthesize critical review (Q2)"
+STAT_REPORT -[#843c39]-> EVIDENCE : "33. Embed statistical outcomes (Q3)"
+CONSOL_CSV -[#ad494a]-> EVIDENCE : "34. Embed empirical benchmarks (Q4/Q5)"
+REVIEW_RESP -[#d6616b]-> EVIDENCE : "35. Embed peer review response (Q6)"
+EVIDENCE -[#e7969c]-> TEX : "36. Supply content & claims to manuscript"
+LIT_MAT -[#7b4173]-> BIB : "37. Export verified BibTeX records"
+CONSOL_CSV -[#a55194]-> TEX : "38. Populate LaTeX benchmark tables"
+ABL_CSV -[#ce6dbd]-> TEX : "39. Populate LaTeX ablation table"
+FIG1 -[#de9ed6]-> TEX : "40. Include Figure 1 in LaTeX"
+FIG2 -[#3182bd]-> TEX : "41. Include Figure 2 in LaTeX"
+FIG3 -[#6baed6]-> TEX : "42. Include Figure 3 in LaTeX"
+BIB -[#9ecae1]-> PDF : "43. Compile citations via BibTeX"
+TEX -[#c6dbef]-> PDF : "44. Compile camera-ready 8-page PDF"
+
+@enduml
